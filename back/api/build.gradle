@@ -1,0 +1,20 @@
+apply plugin: 'pegasus'
+apply plugin: 'java'
+apply plugin: "maven"
+
+artifacts {
+  archives mainRestClientJar
+  archives mainDataTemplateJar
+} 
+
+configure(install.repositories.mavenInstaller) {
+  addFilter('rest-client') {artifact, file ->
+    artifact.name == 'api-rest-client'
+  }.artifactId = 'rest-client'
+  
+  addFilter('data-template') {artifact, file ->
+    artifact.name == 'api-data-template'
+  }.artifactId = 'data-template'
+   
+  // artifact names for 'data-model', 'avro-schema' and 'rest-model' may be added as well if needed
+}

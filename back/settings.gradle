@@ -1,0 +1,5 @@
+include 'api'
+include 'server'
+include 'client'
+
+rootProject.name = 'back'

@@ -1,0 +1,20 @@
+apply plugin: 'pegasus'
+apply plugin: 'application'
+
+ext.apiProject = project(':api')
+
+mainClassName = "main.Application"
+
+dependencies {
+  compile project(path: ':api', configuration: 'dataTemplate')
+  compile spec.product.pegasus.restliServer
+  compile spec.product.pegasus.restliNettyStandalone
+}
+
+
+task startFortunesServer(type: JavaExec) {
+  main = 'com.linkedin.restli.server.NettyStandaloneLauncher'
+  args = ['-port', '8080', '-packages', 'com.example.fortune.impl']
+  classpath = sourceSets.main.runtimeClasspath
+  standardInput = System.in
+}

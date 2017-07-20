@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "Project",
+  "namespace": "com.example.todo",
+  "doc": "A project with todos",
+  "fields": [
+  	{"name": "id","type": "long","doc": "The project id"},
+  	{"name": "name","type": "string","doc": "The project name"},
+    {"name": "description","type": "string","doc": "The project description"}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "name" : "projects",
+  "namespace" : "com.example.todo",
+  "path" : "/projects",
+  "schema" : "com.example.todo.Project",
+  "doc" : "generated from: com.example.fortune.impl.ProjectsResource",
+  "collection" : {
+    "identifier" : {
+      "name" : "projectsId",
+      "type" : "long"
+    },
+    "supports" : [ "create", "get", "get_all", "update" ],
+    "methods" : [ {
+      "method" : "create"
+    }, {
+      "method" : "get"
+    }, {
+      "method" : "update"
+    }, {
+      "method" : "get_all"
+    } ],
+    "entity" : {
+      "path" : "/projects/{projectsId}"
+    }
+  }
+}

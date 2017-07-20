@@ -1,0 +1,7 @@
+2017-07-13 22:07:34,254 [INFO] from play.api.http.EnabledFilters in scala-execution-context-global-52 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+
+2017-07-13 22:07:34,325 [INFO] from play.api.Play in scala-execution-context-global-52 - Application started (Dev)
