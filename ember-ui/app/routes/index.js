@@ -6,7 +6,6 @@ export default Ember.Route.extend({
   },
   actions: {
     refreshRoute() {
-      console.log("Refresh route")
       this.refresh();
     },
   }

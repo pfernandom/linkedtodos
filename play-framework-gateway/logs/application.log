@@ -1,9 +1,55 @@
-2017-08-10 12:40:14,476 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in scala-execution-context-global-63 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
-2017-08-10 12:40:14,587 [INFO] from play.api.http.EnabledFilters in scala-execution-context-global-63 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+2017-08-10 14:24:35,326 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in scala-execution-context-global-65 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2017-08-10 14:24:35,427 [INFO] from play.api.http.EnabledFilters in scala-execution-context-global-65 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
 
     play.filters.csrf.CSRFFilter
     play.filters.headers.SecurityHeadersFilter
     play.filters.hosts.AllowedHostsFilter
     play.filters.cors.CORSFilter
 
-2017-08-10 12:40:14,594 [INFO] from play.api.Play in scala-execution-context-global-63 - Application started (Dev)
+2017-08-10 14:24:35,432 [INFO] from play.api.Play in scala-execution-context-global-65 - Application started (Dev)
+2017-08-10 14:24:37,402 [ERROR] from com.linkedin.r2.transport.http.client.AsyncPoolImpl in R2 Nio Event Loop-1-1 - localhost/127.0.0.1:8080 HTTP connection pool: object creation failed
+com.linkedin.r2.RetriableRequestException: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8080
+	at com.linkedin.r2.transport.http.client.common.ChannelPoolLifecycle$1.operationComplete(ChannelPoolLifecycle.java:102)
+	at com.linkedin.r2.transport.http.client.common.ChannelPoolLifecycle$1.operationComplete(ChannelPoolLifecycle.java:79)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:514)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:507)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:486)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:427)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:129)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8080
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	... 6 common frames omitted
+2017-08-10 14:24:37,406 [ERROR] from com.linkedin.r2.transport.http.client.AsyncPoolImpl in R2 Nio Event Loop-1-2 - localhost/127.0.0.1:8080 HTTP connection pool: object creation failed
+com.linkedin.r2.RetriableRequestException: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8080
+	at com.linkedin.r2.transport.http.client.common.ChannelPoolLifecycle$1.operationComplete(ChannelPoolLifecycle.java:102)
+	at com.linkedin.r2.transport.http.client.common.ChannelPoolLifecycle$1.operationComplete(ChannelPoolLifecycle.java:79)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:514)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:507)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:486)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:427)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:129)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:639)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:574)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:488)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:450)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:873)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:8080
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:346)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	... 6 common frames omitted

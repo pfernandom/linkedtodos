@@ -6,3 +6,4 @@ cd play-framework-gateway
 cd ..
 cd ember-ui
 npm install
+ember build --prod

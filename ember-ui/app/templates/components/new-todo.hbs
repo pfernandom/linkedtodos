@@ -1,10 +1,26 @@
-<h3>Add TODO:</h3>
-<form class="new-todo">
-  <div  class="form-group">
-    <label>
-      Thing to do:
-      <textarea class="form-control" name="newTodo"></textarea>
-    </label>
-    <button class="form-control" type="submit">Add</button>
+<div class="panel-group new-todo">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">
+          <span class="glyphicon glyphicon-plus"></span>
+          Add TODO
+        </a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+
+      <form>
+        <div  class="form-group">
+          <label>
+            Thing to do:
+            <textarea class="form-control" name="newTodo"></textarea>
+          </label>
+          <button class="form-control" type="submit">Add</button>
+        </div>
+      </form>
+
+
+    </div>
   </div>
-</form>
+</div>

@@ -1,10 +1,14 @@
 version: '2'
 services:
-  web:
-    build: ./front/.
+  gateway:
+    build: ./play-framework-gateway/.
     ports:
     - "9000:9000"
   api:
-    build: ./back/.
+    build: ./restli-services/.
     ports:
     - "8080:8080"
+  ui:
+    build: ./ember-ui/.
+    ports:
+    - "4200:80"

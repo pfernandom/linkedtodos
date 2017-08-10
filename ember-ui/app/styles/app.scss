@@ -28,7 +28,11 @@ body {
 
 
 .new-todo{
-  & > .form-group {
+  .panel-collapse{
+    padding:5px;
+  }
+
+  & .form-group {
     & > label{
       width: 100%;
     }

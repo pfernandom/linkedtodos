@@ -1,7 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  model() {
-    return this.get('store').query('project', { favorite: true });
+  model(params) {
+    return this.get('store').findRecord('project',  params.project_id);
+  },
+  actions: {
+    refreshRoute() {
+      this.refresh();
+    },
   }
 });
