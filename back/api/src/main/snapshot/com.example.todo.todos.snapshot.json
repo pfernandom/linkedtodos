@@ -20,6 +20,10 @@
       "name" : "projectId",
       "type" : "long",
       "doc" : "The id of the project this TODO belongs to"
+    }, {
+      "name" : "deleted",
+      "type" : "boolean",
+      "doc" : "Flag for logical delete"
     } ]
   } ],
   "schema" : {

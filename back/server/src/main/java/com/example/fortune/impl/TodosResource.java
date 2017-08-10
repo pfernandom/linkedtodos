@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.example.todo.Todo;
 import com.linkedin.restli.common.HttpStatus;
 import com.linkedin.restli.server.CreateKVResponse;
@@ -18,7 +21,9 @@ import com.linkedin.restli.server.resources.CollectionResourceTemplate;
 
 @RestLiCollection(name = "todos", namespace = "com.example.todo")
 public class TodosResource extends CollectionResourceTemplate<Long, Todo> {
-
+	
+	final static Logger LOG = LoggerFactory.getLogger(TodosResource.class);
+	
 	static Map<Long, Todo> todos = new HashMap<Long, Todo>();
 	static Long inc = 4l;
 	static {
@@ -28,6 +33,7 @@ public class TodosResource extends CollectionResourceTemplate<Long, Todo> {
 		todo.setCompleted(false);
 		todo.setDescription("Learn Rest.li");
 		todo.setProjectId(1L);
+		todo.setDeleted(false);
 		todos.put(1L, todo); 
 		
 		todo = new Todo();
@@ -35,6 +41,7 @@ public class TodosResource extends CollectionResourceTemplate<Long, Todo> {
 		todo.setCompleted(false);
 		todo.setDescription("Learn Play Framework");
 		todo.setProjectId(1L);
+		todo.setDeleted(false);
 		todos.put(2L, todo); 
 		
 		todo = new Todo();
@@ -42,6 +49,7 @@ public class TodosResource extends CollectionResourceTemplate<Long, Todo> {
 		todo.setCompleted(false);
 		todo.setDescription("Learn EmberJS");
 		todo.setProjectId(1L);
+		todo.setDeleted(false);
 		todos.put(3L, todo); 
 		
 		
@@ -50,13 +58,18 @@ public class TodosResource extends CollectionResourceTemplate<Long, Todo> {
 		todo.setCompleted(false);
 		todo.setDescription("Have a beer");
 		todo.setProjectId(2L);
+		todo.setDeleted(false);
 		todos.put(4L, todo); 
 		
 	}
 
 	@Override
 	public List<Todo> getAll(@Context PagingContext pagingContext) {
-		return todos.values().stream().collect(Collectors.toList());
+		return todos.values().stream().filter(t -> {
+			LOG.info("Filter todo: "+t.isDeleted());
+			
+			return !t.isDeleted();
+			}).collect(Collectors.toList());
 	}
 
 	@Override
@@ -84,7 +97,7 @@ public class TodosResource extends CollectionResourceTemplate<Long, Todo> {
 	
 	@Override
 	public UpdateResponse delete(Long key) {
-		todos.remove(key);
+		todos.get(key).setDeleted(true);
 		return new UpdateResponse(HttpStatus.S_204_NO_CONTENT);
 	}
 	

@@ -10,6 +10,8 @@ public interface TodoService {
 
 	CompletableFuture<Todo> addTodo(Todo todo);
 	
+	void deleteTodo(Long id);
+	
 	CompletableFuture<Todo> updateTodo(Long id, Todo todo);
 	
 	CompletableFuture<List<Todo>> getAllTodos();

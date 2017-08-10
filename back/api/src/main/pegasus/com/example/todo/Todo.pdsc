@@ -7,6 +7,7 @@
   	{"name": "id","type": "long","doc": "The TODO id"},
     {"name": "description","type": "string","doc": "The TODO description"},
     {"name": "completed","type": "boolean","doc": "Flags if the TODO is completed or not"},
-    {"name": "projectId","type": "long","doc": "The id of the project this TODO belongs to"}
+    {"name": "projectId","type": "long","doc": "The id of the project this TODO belongs to"},
+    {"name": "deleted","type": "boolean","doc": "Flag for logical delete"}
   ]
 }

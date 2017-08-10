@@ -12,6 +12,7 @@ import com.example.todo.ProjectsGetBuilder;
 import com.example.todo.Todo;
 import com.example.todo.TodosBuilders;
 import com.example.todo.TodosCreateBuilder;
+import com.example.todo.TodosDeleteBuilder;
 import com.example.todo.TodosGetAllBuilder;
 import com.example.todo.TodosGetBuilder;
 import com.example.todo.TodosUpdateBuilder;
@@ -232,6 +233,16 @@ public class TodoServiceRest implements TodoService{
 		engine.run(print);
 		
 		return response;
+	}
+
+	@Override
+	public void deleteTodo(Long id) {
+		TodosDeleteBuilder getBuilder = _todosBuilders.delete();
+		Request<EmptyRecord> todoRequest = getBuilder.id(id).build();
+				
+		Task<Response<EmptyRecord>> todoResponseTask = _parseqClient.createTask(todoRequest);
+			
+		engine.run(todoResponseTask);	
 	}
 
 }

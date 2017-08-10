@@ -3,9 +3,9 @@ organization := "com.example"
 
 version := "1.0-SNAPSHOT"
 
-val ivyLocal = Resolver.file("local", file(Path.userHome.absolutePath + "/.ivy2/local"))(Resolver.ivyStylePatterns)
+resolvers += "Maven Central Server" at "http://repo1.maven.org/maven2"
 
-externalResolvers := Seq(ivyLocal, Resolver.mavenLocal)
+resolvers += Resolver.mavenLocal
 
 lazy val root = (project in file(".")).enablePlugins(PlayJava)
 

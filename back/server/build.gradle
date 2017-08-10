@@ -9,6 +9,9 @@ dependencies {
   compile project(path: ':api', configuration: 'dataTemplate')
   compile spec.product.pegasus.restliServer
   compile spec.product.pegasus.restliNettyStandalone
+  // https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+  testCompile group: 'org.slf4j', name: 'slf4j-simple', version: '1.6.1'
+  
 }
 
 
@@ -17,4 +20,5 @@ task startServer(type: JavaExec) {
   args = ['-port', '8080', '-packages', 'com.example.fortune.impl']
   classpath = sourceSets.main.runtimeClasspath
   standardInput = System.in
+  standardOutput = System.out
 }

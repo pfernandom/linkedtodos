@@ -13,4 +13,17 @@ GET		/test						controllers.HomeController.test
 
 GET		/todos						controllers.HomeController.todos
 
-GET		/projects/:id						controllers.HomeController.projects(id: Long)
+GET 	/todos/:id						controllers.HomeController.getTodo(id: Long)
+
++ nocsrf
+POST	/todos						controllers.HomeController.createTodo()
+
++ nocsrf
+PUT	/todos/:id						controllers.HomeController.updateTodo(id: Long)
+
++ nocsrf
+DELETE	/todos/:id						controllers.HomeController.deleteTodo(id: Long)
+
+GET		/projects					controllers.HomeController.allProjects()
+
+GET		/projects/:id				controllers.HomeController.projects(id: Long)
