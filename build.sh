@@ -1,5 +1,8 @@
-cd back
+cd restli-services
 ./build.sh
 cd ..
-cd front
+cd play-framework-gateway
 ./build.sh
+cd ..
+cd ember-ui
+npm install
