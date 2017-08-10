@@ -1,0 +1,36 @@
+@import "bootstrap";
+
+
+body {
+  padding-top: 20px;
+}
+
+.todo.todo{
+  user-select: none;
+  &.list-group-item{
+    cursor: pointer;
+    margin-bottom: 5px;
+  }
+  .list-group-item-heading {
+    .btn{
+      float:right;
+      .glyphicon{
+        top: 4px;
+      }
+    }
+  }
+  &.active {
+    .list-group-item-heading {
+      text-decoration: line-through;
+    }
+  }
+}
+
+
+.new-todo{
+  & > .form-group {
+    & > label{
+      width: 100%;
+    }
+  }
+}

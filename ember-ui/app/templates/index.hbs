@@ -1,0 +1,8 @@
+{{#each model as |project|}}
+  {{project-with-todos project=project}}
+  {{new-todo projectId = project.id refreshRoute="refreshControler"}}
+  <hr/>
+{{else}}
+  No projects to display
+{{/each}}
+

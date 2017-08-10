@@ -1,0 +1,8 @@
+<div class="todo list-group-item {{if todo.completed "active" ""}}" tabindex="0">
+  <h4 class="list-group-item-heading">{{todo.description}}
+    <button type="button" class="btn btn-default" aria-label="Delete TO-DO" onclick={{action 'deleteTodo'}}>
+      <span class="glyphicon glyphicon-trash"></span>
+    </button>
+  </h4>
+  <p class="list-group-item-text">Completed? {{todo.completed}}</p>
+</div>

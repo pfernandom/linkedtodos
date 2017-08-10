@@ -1,0 +1,10 @@
+<h2>Project:{{project.name}}</h2>
+<p>{{project.description}}</p>
+
+<div class="todos list-group">
+  {{#each project.todos as |todo|}}
+    {{simple-todo todo=todo}}
+  {{else}}
+    No TODOs to display
+  {{/each}}
+</div>
