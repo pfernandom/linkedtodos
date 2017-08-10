@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import com.example.todo.Project;
 import com.example.todo.ProjectsBuilders;
+import com.example.todo.ProjectsGetAllBuilder;
 import com.example.todo.ProjectsGetBuilder;
 import com.example.todo.Todo;
 import com.example.todo.TodosBuilders;
@@ -20,6 +21,7 @@ import com.example.util.RestUtils;
 import com.google.common.collect.Lists;
 import com.linkedin.parseq.Engine;
 import com.linkedin.parseq.Task;
+import com.linkedin.restli.client.CreateRequest;
 import com.linkedin.restli.client.ParSeqRestClient;
 import com.linkedin.restli.client.Request;
 import com.linkedin.restli.client.Response;
@@ -67,24 +69,43 @@ public class TodoServiceRest implements TodoService{
 	}
 
 	@Override
-	public void addTodo(Todo todo) {
+	public CompletableFuture<Todo> addTodo(Todo todo) {
 		TodosCreateBuilder getBuilder = _todosBuilders.create();
-		Request<EmptyRecord> todoRequest = getBuilder.input(todo).build();
 		
-		Task<Response<EmptyRecord>> todoResponseTask = _parseqClient.createTask(todoRequest);
+		CreateRequest<Todo> todoRequest = getBuilder.input(todo).build();
+		
+		CompletableFuture<Todo> response =  new CompletableFuture<>();
+		
+		Task<Response<EmptyRecord>> todoResponseTask = _parseqClient.createTask(todoRequest)
+				.andThen("return", (res)->{
+					System.out.println("Response headers:");
+					System.out.println(res.getHeaders());
+					System.out.println("ID: "+res.getId());
+					todo.setId(Long.parseLong(res.getId()));
+					response.complete(todo);
+					
+				});
 			
 		engine.run(todoResponseTask);
+		return response;
 		
 	}
 
 	@Override
-	public void updateTodo(Long id, Todo todo) {
+	public CompletableFuture<Todo> updateTodo(Long id, Todo todo) {
 		TodosUpdateBuilder getBuilder = _todosBuilders.update();
 		Request<EmptyRecord> todoRequest = getBuilder.id(id).input(todo).build();
 		
-		Task<Response<EmptyRecord>> todoResponseTask = _parseqClient.createTask(todoRequest);
+		CompletableFuture<Todo> response =  new CompletableFuture<>();
+		
+		Task<Response<EmptyRecord>> todoResponseTask = _parseqClient.createTask(todoRequest)
+				.andThen("return", (res)->{
+					response.complete(todo);
+					
+				});
 			
 		engine.run(todoResponseTask);
+		return response;
 	}
 
 	@Override
@@ -126,7 +147,9 @@ public class TodoServiceRest implements TodoService{
 					CollectionResponse<Todo> todosList = tuple._2().getEntity();
 					
 					ProjectWithTodos pt = new ProjectWithTodos();
-					pt.setProject(project);
+					pt.setId(Long.toString(project.getId()));
+					pt.setName(project.getName());
+					pt.setDescription(project.getDescription());
 					
 					List<Todo> todos = new ArrayList<Todo>();
 					
@@ -154,6 +177,61 @@ public class TodoServiceRest implements TodoService{
 		engine.shutdown();
 		engine.awaitTermination(5, TimeUnit.SECONDS);
 		super.finalize();
+	}
+
+	@Override
+	public CompletableFuture<List<ProjectWithTodos>> getAllProjectWithTodos() {
+		ProjectsGetAllBuilder getBuilder = _projectsBuilders.getAll();
+		Request<CollectionResponse<Project>> projectRequest = getBuilder.build();
+		
+		TodosGetAllBuilder getTodosBuilder = _todosBuilders.getAll();
+		Request<CollectionResponse<Todo>> todoRequest = getTodosBuilder.build();
+		
+		CompletableFuture<List<ProjectWithTodos>> response =  new CompletableFuture<>();
+		
+		Task<Response<CollectionResponse<Project>>> projectResponse = _parseqClient.createTask(projectRequest);
+		Task<Response<CollectionResponse<Todo>>> todosResponse = _parseqClient.createTask(todoRequest);
+		
+		Task<List<ProjectWithTodos>> print = Task.par(projectResponse,todosResponse)
+				.map("map", (tuple) -> {
+					CollectionResponse<Project> projectList = tuple._1().getEntity();
+					CollectionResponse<Todo> todosList = tuple._2().getEntity();
+					
+					List<ProjectWithTodos> result = new ArrayList<ProjectWithTodos>();
+										
+					System.out.println("Getting list of proj");
+					
+					projectList.getElements().stream().forEach(p ->{
+						System.out.println("Project");
+						System.out.println(p.getName());
+						ProjectWithTodos pt = new ProjectWithTodos();
+						pt.setId(Long.toString(p.getId()));
+						pt.setName(p.getName());
+						pt.setDescription(p.getDescription());
+						
+						List<Todo> todos = new ArrayList<Todo>();
+						
+						todosList.getElements()
+							.stream()
+							.filter(t -> t.getProjectId() == p.getId()).forEach(todos::add);
+						
+						pt.setTodos(todos);
+						result.add(pt);
+						
+					});
+					
+					
+					
+				return result;
+			})
+			.andThen("print", (str)->{
+				System.out.println(str);
+				response.complete(str);
+			});
+		
+		engine.run(print);
+		
+		return response;
 	}
 
 }

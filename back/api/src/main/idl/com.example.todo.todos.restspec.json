@@ -9,13 +9,21 @@
       "name" : "todosId",
       "type" : "long"
     },
-    "supports" : [ "create", "get", "get_all", "update" ],
+    "supports" : [ "create", "delete", "get", "get_all", "update" ],
     "methods" : [ {
+      "annotations" : {
+        "returnEntity" : { }
+      },
       "method" : "create"
     }, {
       "method" : "get"
     }, {
+      "annotations" : {
+        "returnEntity" : { }
+      },
       "method" : "update"
+    }, {
+      "method" : "delete"
     }, {
       "method" : "get_all"
     } ],

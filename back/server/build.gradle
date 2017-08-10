@@ -12,7 +12,7 @@ dependencies {
 }
 
 
-task startFortunesServer(type: JavaExec) {
+task startServer(type: JavaExec) {
   main = 'com.linkedin.restli.server.NettyStandaloneLauncher'
   args = ['-port', '8080', '-packages', 'com.example.fortune.impl']
   classpath = sourceSets.main.runtimeClasspath

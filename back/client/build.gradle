@@ -2,7 +2,9 @@ apply plugin: 'java'
 apply plugin: "maven"
 
 dependencies {
-  compile project(path: ':api', configuration: 'restClient')
+  //compile project(path: ':api', configuration: 'restClient')
+  compile group: 'com.example', name: 'data-template', version: '1.0'
+  compile group: 'com.example', name: 'rest-client', version: '1.0'
   compile group: 'com.linkedin.pegasus', name: 'r2-netty', version: '11.0.17'
   compile group: 'com.linkedin.parseq', name: 'parseq', version: '2.6.17'
   compile group: 'com.linkedin.parseq', name: 'parseq-http-client', version: '2.6.17'

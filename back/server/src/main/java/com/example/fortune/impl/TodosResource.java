@@ -7,11 +7,13 @@ import java.util.stream.Collectors;
 
 import com.example.todo.Todo;
 import com.linkedin.restli.common.HttpStatus;
-import com.linkedin.restli.server.CreateResponse;
+import com.linkedin.restli.server.CreateKVResponse;
 import com.linkedin.restli.server.PagingContext;
 import com.linkedin.restli.server.UpdateResponse;
 import com.linkedin.restli.server.annotations.Context;
 import com.linkedin.restli.server.annotations.RestLiCollection;
+import com.linkedin.restli.server.annotations.RestMethod;
+import com.linkedin.restli.server.annotations.ReturnEntity;
 import com.linkedin.restli.server.resources.CollectionResourceTemplate;
 
 @RestLiCollection(name = "todos", namespace = "com.example.todo")
@@ -63,17 +65,27 @@ public class TodosResource extends CollectionResourceTemplate<Long, Todo> {
 	}
 	
 	@Override
-	public CreateResponse create(Todo entity) {
+	@RestMethod.Create
+	@ReturnEntity
+	public CreateKVResponse<Long,Todo> create(Todo entity) {
 		entity.setId(++inc);
 		todos.put(inc, entity);
-		return new CreateResponse(inc);
+		return new CreateKVResponse<Long,Todo>(inc, entity);
 	}
 	
+	
 	@Override
+	@ReturnEntity
 	public UpdateResponse update(Long key, Todo entity) {
 		entity.setId(key);
 		todos.put(key, entity);
-		return new UpdateResponse(HttpStatus.S_200_OK);
+		return new UpdateResponse(HttpStatus.S_204_NO_CONTENT);
+	}
+	
+	@Override
+	public UpdateResponse delete(Long key) {
+		todos.remove(key);
+		return new UpdateResponse(HttpStatus.S_204_NO_CONTENT);
 	}
 	
 

@@ -8,13 +8,14 @@ import com.example.todo.Todo;
 public interface TodoService {
 	CompletableFuture<Todo> getTodo(long id);
 
-	void addTodo(Todo todo);
-
-	void updateTodo(Long id, Todo todo);
+	CompletableFuture<Todo> addTodo(Todo todo);
+	
+	CompletableFuture<Todo> updateTodo(Long id, Todo todo);
 	
 	CompletableFuture<List<Todo>> getAllTodos();
 	
-	
 	CompletableFuture<ProjectWithTodos> getProjectWithTodos(Long idProject);
+	
+	CompletableFuture<List<ProjectWithTodos>> getAllProjectWithTodos();
 
 }

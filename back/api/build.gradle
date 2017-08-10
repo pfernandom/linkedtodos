@@ -15,6 +15,6 @@ configure(install.repositories.mavenInstaller) {
   addFilter('data-template') {artifact, file ->
     artifact.name == 'api-data-template'
   }.artifactId = 'data-template'
-   
+     
   // artifact names for 'data-model', 'avro-schema' and 'rest-model' may be added as well if needed
 }

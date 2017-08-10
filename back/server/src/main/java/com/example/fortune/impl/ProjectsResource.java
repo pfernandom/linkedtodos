@@ -29,10 +29,10 @@ public class ProjectsResource extends CollectionResourceTemplate<Long, Project> 
 		projects.put(1L, project); 
 		
 		project = new Project();
-		project.setId(1L);
+		project.setId(2L);
 		project.setName("Post-Interview");
 		project.setDescription("Things to do after the interview");
-		projects.put(1L, project); 
+		projects.put(2L, project); 
 				
 	}
 

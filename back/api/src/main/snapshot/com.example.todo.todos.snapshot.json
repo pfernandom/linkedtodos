@@ -34,15 +34,23 @@
         "type" : "long"
       },
       "methods" : [ {
-        "method" : "create"
+        "method" : "create",
+        "annotations" : {
+          "returnEntity" : { }
+        }
       }, {
         "method" : "get"
       }, {
-        "method" : "update"
+        "method" : "update",
+        "annotations" : {
+          "returnEntity" : { }
+        }
+      }, {
+        "method" : "delete"
       }, {
         "method" : "get_all"
       } ],
-      "supports" : [ "create", "get", "get_all", "update" ],
+      "supports" : [ "create", "delete", "get", "get_all", "update" ],
       "entity" : {
         "path" : "/todos/{todosId}"
       }
