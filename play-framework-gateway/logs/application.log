@@ -1,0 +1,9 @@
+2017-08-10 12:40:14,476 [WARN] from org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator in scala-execution-context-global-63 - HV000184: ParameterMessageInterpolator has been chosen, EL interpolation will not be supported
+2017-08-10 12:40:14,587 [INFO] from play.api.http.EnabledFilters in scala-execution-context-global-63 - Enabled Filters (see <https://www.playframework.com/documentation/latest/Filters>):
+
+    play.filters.csrf.CSRFFilter
+    play.filters.headers.SecurityHeadersFilter
+    play.filters.hosts.AllowedHostsFilter
+    play.filters.cors.CORSFilter
+
+2017-08-10 12:40:14,594 [INFO] from play.api.Play in scala-execution-context-global-63 - Application started (Dev)
