@@ -1,5 +1,11 @@
 package controllers;
 
+/**
+ * A Java bean for a marshalling Todos
+ * 
+ * @author pedro.f.marquez.soto
+ *
+ */
 public class TodoBean {
 	private String id;
 	private String description;

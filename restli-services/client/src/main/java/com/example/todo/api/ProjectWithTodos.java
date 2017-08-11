@@ -5,12 +5,17 @@ import java.util.List;
 import com.example.todo.Project;
 import com.example.todo.Todo;
 
+/**
+ * A bean for a Project with embedded Todos
+ * 
+ * @author pedro.f.marquez.soto
+ *
+ */
 public class ProjectWithTodos {
 	String id;
 	String name;
 	String description;
 	List<Todo> todos;
-
 
 	public String getId() {
 		return id;

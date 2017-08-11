@@ -13,29 +13,38 @@ import com.linkedin.parseq.EngineBuilder;
 import play.Configuration;
 import play.Environment;
 
-
-
+/**
+ * A component module for Dependency Injection.
+ * 
+ * @author pedro.f.marquez.soto
+ *
+ */
 public class ComponentModule extends AbstractModule {
-	
+
 	private final Configuration configuration;
 
 	public ComponentModule(@SuppressWarnings("unused") Environment environment, Configuration configuration) {
-        this.configuration = configuration;
-    }
-	
+		this.configuration = configuration;
+	}
+
+	/**
+	 * Configure the bindings
+	 */
 	@Override
-    protected void configure() {
-    	Engine engine = getEngine();
-    	TodoServiceRest todoService = new TodoServiceRest(engine, configuration.getString("app.rest.host"));
-    	System.out.println(todoService);
-    	
-        bind(TodoService.class).
-                toInstance(todoService);
-        bind(Engine.class).
-        		toInstance(engine);
-    }
-    
-    public static Engine getEngine() {
+	protected void configure() {
+		Engine engine = getEngine();
+		TodoServiceRest todoService = new TodoServiceRest(engine, configuration.getString("app.rest.host"));
+
+		bind(TodoService.class).toInstance(todoService);
+		bind(Engine.class).toInstance(engine);
+	}
+
+	/**
+	 * Generate a single ParSeq Engine to be injected in the application.
+	 * 
+	 * @return
+	 */
+	public static Engine getEngine() {
 		final int numCores = Runtime.getRuntime().availableProcessors();
 		final ExecutorService taskScheduler = Executors.newFixedThreadPool(numCores + 1);
 		final ScheduledExecutorService timerScheduler = Executors.newSingleThreadScheduledExecutor();

@@ -1,5 +1,8 @@
 import Ember from 'ember';
 
+/**
+ * Component to display single todos instances
+ */
 export default Ember.Component.extend({
   active:false,
   store: Ember.inject.service(),
