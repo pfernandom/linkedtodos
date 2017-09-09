@@ -32,7 +32,10 @@ moduleForModel('project', 'Unit | Serializer | project', {
     });
   },
   afterEach() {
-    server.shutdown();
+    if (server) {
+      server.shutdown();
+    }
+    server = null;
   }
 });
 
@@ -41,7 +44,7 @@ test('it serializes records', function(assert) {
   let record = this.subject();
 
   let serializedRecord = record.serialize();
-
+  //http://localhost:4200/api/projects
   assert.ok(serializedRecord);
 });
 
@@ -50,9 +53,11 @@ test('it serializes array responses', function(assert) {
   return this.store().findAll('project').then((projects) => {
     var projArr = projects.toArray();
 
+    console.log(projArr)
+
     var firstTodo = projArr[0].get('todos').toArray()[0];
 
-    assert.equal(projects.get('length'), 2);
+    assert.equal(projects.get('length'), 2, "The expected projecs are 2");
     assert.equal(projArr[0].get('name'),'Project 1')
     assert.equal(projArr[0].get('description'),'First project')
     assert.equal(firstTodo.get('description'),'To do something with the server');

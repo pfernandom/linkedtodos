@@ -12,5 +12,7 @@ test('it renders', function(assert) {
   this.set('todo',{"id":1, "description":"To do something with the server", "completed":false})
   this.render(hbs`{{simple-todo todo=todo}}`);
 
-  assert.equal(this.$().text().trim(), 'To do something with the server\n  Completed? false');
+  var reg = /To do something with the server(.|[\r\n])*Completed\?(.*)false/g
+
+  assert.ok(reg.test(this.$().text()),"Finds the expected content text");
 });

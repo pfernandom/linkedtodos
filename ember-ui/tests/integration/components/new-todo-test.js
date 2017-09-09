@@ -12,14 +12,10 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{new-todo}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  var regEmpty = /(.|[\n\r])*Add TODO(.|[\n\r])*Thing to do:(.|[\n\r])*/g
 
-  // Template block usage:
-  this.render(hbs`
-    {{#new-todo}}
-      template block text
-    {{/new-todo}}
-  `);
+  var content = this.$().text().trim();
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.deepEqual(regEmpty.exec(content)[0], content, 'Component displays correctly');
+
 });

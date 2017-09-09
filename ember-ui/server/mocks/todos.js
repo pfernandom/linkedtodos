@@ -15,7 +15,12 @@ module.exports = function(app) {
   });
 
   todosRouter.post('/', function(req, res) {
-    res.status(201).end();
+    console.log(req.body)
+    var result = req.body;
+    result.todo.id = Math.random()* 200;
+    todos.push(result.todo)
+
+    res.status(201).send(req.body);
   });
 
   todosRouter.get('/:id', function(req, res) {

@@ -16,7 +16,7 @@ export default Ember.Component.extend({
       project: this.get("projectId")
     });
 
-    todo.save().then(todo => {
+    todo.save().then(() => {
       this.sendAction('refresh');
     })
       .catch(err => {

@@ -17,7 +17,7 @@ export default Ember.Component.extend({
     return true;
   },
   actions:{
-    deleteTodo(event){
+    deleteTodo(){
       var r = confirm("Delete the Todo?");
       if (r == true) {
         var store = this.get('store');
